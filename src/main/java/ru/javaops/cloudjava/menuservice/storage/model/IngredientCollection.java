@@ -6,12 +6,12 @@ import java.util.List;
 
 @Data
 public class IngredientCollection {
-    private List<Ingredient> content;
+    private List<Ingredient> ingredients;
 
     public IngredientCollection() {
     }
     public IngredientCollection(List<Ingredient> content) {
-        this.content = content;
+        this.ingredients = content;
     }
 
 }
