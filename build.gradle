@@ -27,6 +27,7 @@ ext {
 	mapstructVersion = '1.5.5.Final'
 	mapstructLombokBindingVersion = '0.2.0'
 	springdocVersion = '2.5.0'
+    testcontainers = '2.0.2'
 }
 
 dependencies {
@@ -46,12 +47,15 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapstructLombokBindingVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:postgresql'
+    testImplementation "org.testcontainers:testcontainers:${testcontainers}"
+    testImplementation "org.testcontainers:testcontainers-junit-jupiter:${testcontainers}"
+    testImplementation "org.testcontainers:testcontainers-postgresql:${testcontainers}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 
+tasks.named('test') {
+    environment "TESTCONTAINERS_RYUK_DISABLED", "true"
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
