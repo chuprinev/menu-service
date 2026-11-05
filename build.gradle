@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
+	id 'org.springframework.boot' version '3.2.11'
 	id 'io.spring.dependency-management' version '1.1.5'
 }
 
@@ -9,6 +9,10 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
+}
+
+jar {
+	enabled = false
 }
 
 configurations {
@@ -51,6 +55,11 @@ dependencies {
     testImplementation "org.testcontainers:testcontainers-junit-jupiter:${testcontainers}"
     testImplementation "org.testcontainers:testcontainers-postgresql:${testcontainers}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+}
+
+bootBuildImage {
+	imageName = "${project.name}"
+	environment = ["BP_JVM_VERSION": "17.*"]
 }
 
 tasks.named('test') {
